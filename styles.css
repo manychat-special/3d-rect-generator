@@ -1,0 +1,214 @@
+@font-face {
+  font-family: 'ManychatGravity';
+  src: url('ManychatGravity-Normal.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --brand-black: #000000;
+  --brand-white: #ffffff;
+  --brand-green: #00FF00;
+  --ui-bg: #111;
+  --ui-surface: #1a1a1a;
+  --ui-text: #aaa;
+  --ui-text-bright: #fff;
+}
+
+body {
+  background: var(--ui-bg);
+  color: var(--ui-text-bright);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Toolbar ===== */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 20px;
+  background: var(--ui-surface);
+  border-bottom: 1px solid #333;
+  flex-wrap: wrap;
+}
+
+.tool-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tool-group label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ui-text);
+  margin-right: 2px;
+}
+
+.tool-group input[type="text"] {
+  background: #000;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 15px;
+  font-family: 'ManychatGravity', 'Arial Black', Impact, sans-serif;
+  text-transform: uppercase;
+  width: 160px;
+  outline: none;
+  border-radius: 4px;
+}
+
+.tool-group input[type="text"]:focus {
+  border-color: var(--brand-green);
+}
+
+.tool-group input[type="range"] {
+  width: 90px;
+  accent-color: var(--brand-green);
+}
+
+.tool-group .val {
+  font-size: 11px;
+  color: var(--ui-text);
+  font-variant-numeric: tabular-nums;
+  min-width: 28px;
+  text-align: center;
+}
+
+/* ===== Color swatch toggles ===== */
+.swatches {
+  display: flex;
+  gap: 3px;
+}
+
+.swatch {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #444;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  padding: 0;
+  outline: none;
+}
+
+.swatch:hover { border-color: #888; }
+.swatch.active { border-color: var(--brand-green); box-shadow: 0 0 0 1px var(--brand-green); }
+
+.swatch-black { background: var(--brand-black); }
+.swatch-white { background: var(--brand-white); }
+.swatch-green { background: var(--brand-green); }
+
+/* ===== Separator ===== */
+.sep {
+  width: 1px;
+  height: 28px;
+  background: #333;
+}
+
+/* ===== Action buttons ===== */
+.btn {
+  background: var(--brand-green);
+  color: #000;
+  border: none;
+  padding: 7px 14px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  transition: opacity 0.15s;
+}
+
+.btn:hover { opacity: 0.85; }
+.btn:active { opacity: 0.7; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ui-text);
+  border: 1px solid #444;
+}
+.btn-ghost:hover { border-color: #666; color: var(--ui-text-bright); opacity: 1; }
+
+/* ===== Preview area ===== */
+.preview {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+
+.preview:active { cursor: grabbing; }
+
+.scene {
+  width: 900px;
+  height: 500px;
+  perspective: 800px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.face {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'ManychatGravity', 'Arial Black', Impact, sans-serif;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+/* ===== Angle badge ===== */
+.angle-badge {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  font-size: 13px;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, monospace;
+  pointer-events: none;
+}
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--brand-green);
+  color: #000;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: all 0.25s ease;
+  z-index: 100;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
