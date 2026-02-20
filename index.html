@@ -8,108 +8,6 @@
 </head>
 <body>
 
-  <!-- ===== Toolbar ===== -->
-  <div class="toolbar">
-
-    <!-- Words -->
-    <div class="tool-group">
-      <label>Word 1</label>
-      <input type="text" id="word1" value="WORK" maxlength="20">
-    </div>
-    <div class="tool-group">
-      <label>Word 2</label>
-      <input type="text" id="word2" value="PLAY" maxlength="20">
-    </div>
-
-    <div class="sep"></div>
-
-    <!-- Rotation -->
-    <div class="tool-group">
-      <label>Angle</label>
-      <input type="range" id="rotationX" min="-90" max="90" value="20">
-      <span class="val" id="rotVal">20&deg;</span>
-    </div>
-
-    <div class="sep"></div>
-
-    <!-- Dimensions -->
-    <div class="tool-group">
-      <label>W</label>
-      <input type="range" id="boxWidth" min="100" max="900" value="450">
-      <span class="val" id="wVal">450</span>
-    </div>
-    <div class="tool-group">
-      <label>H</label>
-      <input type="range" id="boxHeight" min="30" max="200" value="70">
-      <span class="val" id="hVal">70</span>
-    </div>
-    <div class="tool-group">
-      <label>D</label>
-      <input type="range" id="boxDepth" min="20" max="200" value="70">
-      <span class="val" id="dVal">70</span>
-    </div>
-    <div class="tool-group">
-      <label>Font</label>
-      <input type="range" id="fontSize" min="20" max="160" value="77">
-      <span class="val" id="fsVal">77</span>
-    </div>
-
-    <div class="sep"></div>
-
-    <!-- Color swatches -->
-    <div class="tool-group">
-      <label>BG</label>
-      <div class="swatches swatch-group" data-key="bgColor">
-        <button class="swatch swatch-black" data-color="black"></button>
-        <button class="swatch swatch-white" data-color="white"></button>
-        <button class="swatch swatch-green" data-color="green"></button>
-      </div>
-    </div>
-
-    <div class="tool-group">
-      <label>Side 1 BG</label>
-      <div class="swatches swatch-group" data-key="side1Bg">
-        <button class="swatch swatch-black" data-color="black"></button>
-        <button class="swatch swatch-white" data-color="white"></button>
-        <button class="swatch swatch-green" data-color="green"></button>
-      </div>
-    </div>
-
-    <div class="tool-group">
-      <label>Side 1 Text</label>
-      <div class="swatches swatch-group" data-key="side1Text">
-        <button class="swatch swatch-black" data-color="black"></button>
-        <button class="swatch swatch-white" data-color="white"></button>
-        <button class="swatch swatch-green" data-color="green"></button>
-      </div>
-    </div>
-
-    <div class="tool-group">
-      <label>Side 2 BG</label>
-      <div class="swatches swatch-group" data-key="side2Bg">
-        <button class="swatch swatch-black" data-color="black"></button>
-        <button class="swatch swatch-white" data-color="white"></button>
-        <button class="swatch swatch-green" data-color="green"></button>
-      </div>
-    </div>
-
-    <div class="tool-group">
-      <label>Side 2 Text</label>
-      <div class="swatches swatch-group" data-key="side2Text">
-        <button class="swatch swatch-black" data-color="black"></button>
-        <button class="swatch swatch-white" data-color="white"></button>
-        <button class="swatch swatch-green" data-color="green"></button>
-      </div>
-    </div>
-
-    <div class="sep"></div>
-
-    <!-- Actions -->
-    <button class="btn" id="downloadPngBtn">Download PNG</button>
-    <button class="btn btn-ghost" id="copySvgBtn">Copy SVG</button>
-    <button class="btn btn-ghost" id="downloadSvgBtn">Download SVG</button>
-  </div>
-
   <!-- ===== Preview ===== -->
   <div class="preview" id="preview">
     <div class="scene">
@@ -123,6 +21,98 @@
       </div>
     </div>
     <div class="angle-badge" id="angleBadge">20&deg;</div>
+  </div>
+
+  <!-- ===== Controls Panel ===== -->
+  <div class="panel" id="panel">
+
+    <!-- Words row -->
+    <div class="panel-row panel-row--words">
+      <div class="input-pair">
+        <label>Word 1</label>
+        <input type="text" id="word1" value="WORK" maxlength="20" spellcheck="false">
+      </div>
+      <div class="input-pair">
+        <label>Word 2</label>
+        <input type="text" id="word2" value="PLAY" maxlength="20" spellcheck="false">
+      </div>
+    </div>
+
+    <!-- Sliders row -->
+    <div class="panel-row panel-row--sliders">
+      <div class="slider-group">
+        <label>Angle</label>
+        <input type="range" id="rotationX" min="-90" max="90" value="20">
+        <span class="val" id="rotVal">20&deg;</span>
+      </div>
+      <div class="slider-group">
+        <label>W</label>
+        <input type="range" id="boxWidth" min="100" max="900" value="450">
+        <span class="val" id="wVal">450</span>
+      </div>
+      <div class="slider-group">
+        <label>H</label>
+        <input type="range" id="boxHeight" min="30" max="200" value="70">
+        <span class="val" id="hVal">70</span>
+      </div>
+      <div class="slider-group">
+        <label>D</label>
+        <input type="range" id="boxDepth" min="20" max="200" value="70">
+        <span class="val" id="dVal">70</span>
+      </div>
+      <div class="slider-group">
+        <label>Font</label>
+        <input type="range" id="fontSize" min="20" max="160" value="77">
+        <span class="val" id="fsVal">77</span>
+      </div>
+    </div>
+
+    <!-- Colors + actions row -->
+    <div class="panel-row panel-row--colors">
+      <div class="color-group">
+        <label>BG</label>
+        <div class="swatches swatch-group" data-key="bgColor">
+          <button class="swatch swatch-black" data-color="black"></button>
+          <button class="swatch swatch-white" data-color="white"></button>
+          <button class="swatch swatch-green" data-color="green"></button>
+        </div>
+      </div>
+      <div class="color-group">
+        <label>Side 1</label>
+        <div class="swatches swatch-group" data-key="side1Bg">
+          <button class="swatch swatch-black" data-color="black"></button>
+          <button class="swatch swatch-white" data-color="white"></button>
+          <button class="swatch swatch-green" data-color="green"></button>
+        </div>
+        <div class="swatches swatch-group" data-key="side1Text">
+          <button class="swatch swatch-black" data-color="black"></button>
+          <button class="swatch swatch-white" data-color="white"></button>
+          <button class="swatch swatch-green" data-color="green"></button>
+        </div>
+        <span class="color-hint">bg / text</span>
+      </div>
+      <div class="color-group">
+        <label>Side 2</label>
+        <div class="swatches swatch-group" data-key="side2Bg">
+          <button class="swatch swatch-black" data-color="black"></button>
+          <button class="swatch swatch-white" data-color="white"></button>
+          <button class="swatch swatch-green" data-color="green"></button>
+        </div>
+        <div class="swatches swatch-group" data-key="side2Text">
+          <button class="swatch swatch-black" data-color="black"></button>
+          <button class="swatch swatch-white" data-color="white"></button>
+          <button class="swatch swatch-green" data-color="green"></button>
+        </div>
+        <span class="color-hint">bg / text</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="downloadPngBtn">PNG</button>
+        <button class="btn btn-ghost" id="copySvgBtn">Copy SVG</button>
+        <button class="btn btn-ghost" id="downloadSvgBtn">SVG</button>
+      </div>
+    </div>
+
   </div>
 
   <!-- Toast -->

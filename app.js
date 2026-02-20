@@ -15,7 +15,7 @@ const state = {
   depth: 70,
   fontSize: 77,
   perspective: 800,
-  bgColor: COLORS.black,
+  bgColor: COLORS.white,
   side1Bg: COLORS.black,
   side1Text: COLORS.white,
   side2Bg: COLORS.green,
@@ -79,6 +79,34 @@ function initSwatches() {
   });
 }
 
+// ===== Auto-width from text =====
+function calcAutoWidth(fs) {
+  if (!otFont) return null;
+  try {
+    const measure = (word) => {
+      const path = otFont.getPath(word, 0, 0, fs);
+      const bb = path.getBoundingBox();
+      return bb.x2 - bb.x1;
+    };
+    const w1 = measure(state.word1 || 'WORD');
+    const w2 = measure(state.word2 || 'WORD');
+    const maxW = Math.max(w1, w2);
+    // Add 20% padding, clamp to slider range 100-900
+    return Math.round(Math.min(900, Math.max(100, maxW * 1.2)));
+  } catch (e) {
+    return null;
+  }
+}
+
+function applyAutoWidth() {
+  const fs = parseFloat($('fontSize').value) || 77;
+  const autoW = calcAutoWidth(fs);
+  if (autoW !== null) {
+    $('boxWidth').value = autoW;
+    state.width = autoW;
+  }
+}
+
 // ===== Update scene =====
 function updateScene() {
   state.word1 = $('word1').value.toUpperCase() || 'WORD';
@@ -128,8 +156,16 @@ function applyFace(el, w, h, transform, text, bg, color, fontStyle) {
 }
 
 // ===== Input bindings =====
-['word1','word2','rotationX','boxWidth','boxHeight','boxDepth','fontSize'].forEach(id => {
+['rotationX','boxWidth','boxHeight','boxDepth'].forEach(id => {
   $(id).addEventListener('input', updateScene);
+});
+
+// Word/font changes trigger auto-width recalculation
+['word1','word2','fontSize'].forEach(id => {
+  $(id).addEventListener('input', () => {
+    applyAutoWidth();
+    updateScene();
+  });
 });
 
 // ===== Drag to rotate =====
@@ -550,4 +586,5 @@ async function fallbackPngExport() {
 
 // ===== Init =====
 initSwatches();
+applyAutoWidth();
 updateScene();
